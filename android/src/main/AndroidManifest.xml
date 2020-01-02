@@ -1,3 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.sakadevsinc.sams_flutter_share">
+
+  <application>
+        <provider
+            android:name="com.sakadevsinc.sams_flutter_share.SamsFlutterShareFileProvider"
+            android:authorities="${applicationId}.fileprovider.com.sakadevsinc.sams_flutter_share"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/sams_flutter_share_paths" />
+        </provider>
+    </application>
 </manifest>

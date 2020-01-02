@@ -11,11 +11,6 @@ class SamsFlutterShare {
   static const MethodChannel _channel =
       const MethodChannel('sams_flutter_share');
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-
   // Share a text.
   static void shareText(
       String text,  //The text to share

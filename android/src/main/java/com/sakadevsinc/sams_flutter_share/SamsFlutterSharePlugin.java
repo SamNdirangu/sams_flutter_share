@@ -11,8 +11,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import androidx.annotation.NonNull;
-import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -20,36 +18,23 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** SamsFlutterSharePlugin */
-public class SamsFlutterSharePlugin implements FlutterPlugin, MethodCallHandler {
+public class SamsFlutterSharePlugin implements MethodCallHandler {
   private Registrar _registrar;
+  private final String PROVIDER_AUTH_EXT = "fileprovider.com.sakadevsinc.sams_flutter_share";
+
 
   private SamsFlutterSharePlugin(Registrar registrar) {
       this._registrar = registrar;
   }
-  private final String PROVIDER_AUTH_EXT = "fileprovider.samsfluttershare/auth";
-    
-  @Override
-  public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    final MethodChannel channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "sams_flutter_share");
-    channel.setMethodCallHandler(new SamsFlutterSharePlugin());
-  }
 
-  // This static function is optional and equivalent to onAttachedToEngine. It supports the old
-  // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
-  // plugin registration via this function while apps migrate to use the new Android APIs
-  // post-flutter-1.12 via https://flutter.dev/go/android-project-migration.
-  //
-  // It is encouraged to share logic between onAttachedToEngine and registerWith to keep
-  // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
-  // depending on the user's project. onAttachedToEngine or registerWith must both be defined
-  // in the same class.
+  
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "sams_flutter_share");
     channel.setMethodCallHandler(new SamsFlutterSharePlugin(registrar));
   }
 
   @Override
-  public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+  public void onMethodCall(MethodCall call, Result result) {
     if (call.method.equals("shareText")) {
       shareText(call.arguments);
     }
@@ -104,6 +89,7 @@ public class SamsFlutterSharePlugin implements FlutterPlugin, MethodCallHandler 
     
     shareIntent.setType(mimeType); //Set the mimetype
     File file = new File(activeContext.getCacheDir(), fileName);
+    
     String fileProviderAuthority = activeContext.getPackageName() + PROVIDER_AUTH_EXT;
     Uri contentUri = FileProvider.getUriForFile(activeContext, fileProviderAuthority, file);
     shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
@@ -128,8 +114,6 @@ public class SamsFlutterSharePlugin implements FlutterPlugin, MethodCallHandler 
     @SuppressWarnings("unchecked")
     HashMap<String, Object> argsMap = (HashMap<String, Object>) arguments;
     String shareTitle = (String) argsMap.get("shareTitle");
-
-    @SuppressWarnings("unchecked")
     ArrayList<String> fileNames = (ArrayList<String>) argsMap.get("filesBytes");
     String mimeType = (String) argsMap.get("mimeType");
     String captionText = (String) argsMap.get("captionText");
