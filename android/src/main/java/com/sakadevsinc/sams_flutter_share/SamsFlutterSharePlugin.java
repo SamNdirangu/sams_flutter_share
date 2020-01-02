@@ -20,7 +20,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /** SamsFlutterSharePlugin */
 public class SamsFlutterSharePlugin implements MethodCallHandler {
   private Registrar _registrar;
-  private final String PROVIDER_AUTH_EXT = "fileprovider.com.sakadevsinc.sams_flutter_share";
+  private final String PROVIDER_AUTH_EXT = ".fileprovider.com.sakadevsinc.sams_flutter_share";
 
 
   private SamsFlutterSharePlugin(Registrar registrar) {
