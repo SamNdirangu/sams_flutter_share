@@ -1,8 +1,8 @@
 name: sams_flutter_share
 description: Share files easily and quick
-version: 0.1.4
+version: 0.0.2
 author: Sam Ndirangu <sndirangu7@gmail.com>
-homepage: https://github/samndirangu/sams_flutter_share
+homepage: https://github.com/SamNdirangu/sams_flutter_share
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

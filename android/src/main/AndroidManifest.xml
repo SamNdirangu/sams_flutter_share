@@ -4,7 +4,7 @@
   <application>
         <provider
             android:name="com.sakadevsinc.sams_flutter_share.SamsFlutterShareFileProvider"
-            android:authorities="${applicationId}.fileprovider.com.sakadevsinc.sams_flutter_share"
+            android:authorities="${applicationId}.https://github.com/SamNdirangu/sams_flutter_share"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
